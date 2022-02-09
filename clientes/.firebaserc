@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "clientes-94fcb": {
+      "hosting": {
+        "clientes": [
+          "clientes-94fcb"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "clientes-94fcb"
+  }
+}
