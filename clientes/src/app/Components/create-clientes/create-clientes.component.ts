@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ClientesService } from 'src/app/Services/clientes.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class CreateClientesComponent implements OnInit {
   submitted = false;
   constructor(private fb: FormBuilder,
               private _clienteService: ClientesService,
-              private router: Router) { 
+              private router: Router,
+              private toastr: ToastrService) { 
     this.createcliente = this.fb.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
@@ -39,7 +41,9 @@ export class CreateClientesComponent implements OnInit {
       fechamodificar: new Date()
     }
     this._clienteService.agregarcliente(cliente).then(() => {
-      console.log('cliente registrado con exito');
+      this.toastr.success('El cliente fue registrado con exito','Cliente Registrado',{
+        positionClass: 'toast-bottom-right'
+      });
       this.router.navigate(['/list-clientes'])
     }).catch(error => {
       console.log(error); 
